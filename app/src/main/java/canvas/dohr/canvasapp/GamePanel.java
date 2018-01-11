@@ -75,14 +75,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
     @Override
     public void draw(Canvas canvas){
         super.draw(canvas);
-        if(player.inSession()){
-            canvas.drawColor(Color.WHITE);
-            pickup.draw(canvas);
-            player.draw(canvas);
-            drawMap(canvas);
-            detectPickupCollisions();
-        }
-        else{
+        canvas.drawColor(Color.WHITE);
+        pickup.draw(canvas);
+        player.draw(canvas);
+        drawMap(canvas);
+        detectPickupCollisions();
+
+        if(!player.inSession()){
             showStats(canvas);
         }
     }
@@ -114,6 +113,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback{
     }
 
     public void showStats(Canvas canvas){
-        canvas.drawColor(Color.GRAY);
+        Paint textPaint = new Paint();
+        textPaint.setTextSize(56);
+        textPaint.setColor(Color.BLACK);
+        canvas.drawText("You collected " + player.getOrbsCollected() + " obs", 50, 100, textPaint);
+        canvas.drawText("You spent " + player.getTimeAlive() + " seconds in game", 50, 160, textPaint);
     }
 }

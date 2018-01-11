@@ -4,9 +4,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.util.Log;
-
-import java.util.Random;
 
 /**
  * Created by wes on 9/01/18.
@@ -18,6 +15,7 @@ public class Player implements GameObject {
     private Point location;
     private float absSpeed = 4;
     private int timeAlive = 0;
+    private int orbsCollected = 0;
     private double spdX;
     private double spdY;
     private float radius;
@@ -93,7 +91,16 @@ public class Player implements GameObject {
     }
 
     public void collectPickup(){
-        absSpeed *= 1.01;
+        absSpeed *= 1.02;
+        orbsCollected++;
+    }
+
+    public int getOrbsCollected(){
+        return orbsCollected;
+    }
+
+    public int getTimeAlive(){
+        return timeAlive/60;
     }
 
     public void checkStillInSession(){
